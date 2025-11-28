@@ -5,7 +5,7 @@ Get the Fathom integration running in 5 minutes.
 ## Step 1: Install Dependencies
 
 ```bash
-cd ~/workspace/fathom-integration
+cd ~/workspace/fathom-os-integration
 npm install
 ```
 

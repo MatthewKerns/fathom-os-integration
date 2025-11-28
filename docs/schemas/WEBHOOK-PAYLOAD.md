@@ -42,8 +42,8 @@ This event fires when a meeting recording has finished processing and all data i
       "speaking_time_seconds": 845
     },
     {
-      "name": "Linh Nguyen",
-      "email": "linh@example.com",
+      "name": "Chris",
+      "email": "chris@example.com",
       "is_host": false,
       "is_organizer": false,
       "join_time": "2025-11-27T15:01:00Z",
@@ -51,7 +51,7 @@ This event fires when a meeting recording has finished processing and all data i
       "speaking_time_seconds": 797
     }
   ],
-  "summary": "Matthew and Linh discussed the pipeline status and upcoming deliverables. Key focus areas included Trevor's project completion and Emma's potential deal. Action items were assigned for follow-ups.",
+  "summary": "Matthew and Chris discussed the pipeline status and upcoming deliverables. Key focus areas included Trevor's project completion and Emma's potential deal. Action items were assigned for follow-ups.",
   "key_topics": [
     "Pipeline review",
     "Trevor project status",
@@ -73,7 +73,7 @@ This event fires when a meeting recording has finished processing and all data i
     },
     {
       "text": "Update pipeline tracker",
-      "assignee": "Linh",
+      "assignee": "Chris",
       "due_date": null,
       "completed": false
     }
@@ -83,10 +83,10 @@ This event fires when a meeting recording has finished processing and all data i
       "speaker": "Matthew Kerns",
       "start_time": 0.0,
       "end_time": 5.5,
-      "text": "Hey Linh, thanks for jumping on. Let's go through the pipeline."
+      "text": "Hey Chris, thanks for jumping on. Let's go through the pipeline."
     },
     {
-      "speaker": "Linh Nguyen",
+      "speaker": "Chris",
       "start_time": 5.5,
       "end_time": 12.3,
       "text": "Sounds good. So Trevor is still waiting on approval for the first phase."

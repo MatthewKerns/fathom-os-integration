@@ -76,7 +76,7 @@ Claude processes → Files updated → Notification sent
 | Coaching Call | `05-hr-department/network-contacts/coaching-call-notes/` | Known coach on call |
 | Client Call | `02-operations/project-management/active-projects/` | Known client on call |
 | Networking | `05-hr-department/network-contacts/` | New contacts identified |
-| General | `05-hr-department/fathom-integration/processed/` | Fallback for unclassified |
+| General | `05-hr-department/fathom-os-integration/processed/` | Fallback for unclassified |
 
 ---
 

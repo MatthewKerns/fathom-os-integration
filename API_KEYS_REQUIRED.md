@@ -134,7 +134,7 @@ OS_PATH=/Users/matthewkerns/workspace/ai-agency-sales-os
 ## Quick Setup Checklist
 
 ```bash
-cd ~/workspace/fathom-integration
+cd ~/workspace/fathom-os-integration
 cp .env.example .env
 ```
 

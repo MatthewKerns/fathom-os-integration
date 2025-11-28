@@ -2,62 +2,119 @@ const Anthropic = require('@anthropic-ai/sdk');
 const config = require('../utils/config');
 const logger = require('../utils/logger');
 
+// Initialize Anthropic client
 const client = new Anthropic({
   apiKey: config.anthropic.apiKey,
 });
 
 /**
- * Process meeting data with Claude
- * @param {Object} meetingData - Raw meeting data from Fathom
- * @param {Object} context - OS context (contacts, projects, etc.)
- * @returns {Object} Processed meeting data
+ * Process meeting with Claude AI
+ * @param {string} prompt - The formatted prompt with meeting data and context
+ * @returns {string} Claude's response (raw text)
  */
-async function processMeeting(meetingData, context) {
+async function processMeeting(prompt) {
   logger.info('Sending meeting to Claude for processing');
 
   try {
-    // TODO: Load prompt template from prompts/meetingProcessor.js
-    const prompt = buildPrompt(meetingData, context);
+    const startTime = Date.now();
 
     const message = await client.messages.create({
-      model: 'claude-3-5-sonnet-20241022',
-      max_tokens: 4096,
+      model: config.anthropic.model || 'claude-3-5-sonnet-20241022',
+      max_tokens: config.anthropic.maxTokens || 4096,
+      temperature: 0.3, // Lower temperature for more consistent structured output
       messages: [{
         role: 'user',
         content: prompt,
       }],
+      // Add system message for better JSON formatting
+      system: `You are a meeting processor that analyzes meeting transcripts and outputs structured JSON.
+Always respond with valid JSON matching the exact schema provided.
+Do not include any text outside the JSON response.`
     });
 
     const response = message.content[0].text;
+    const processingTime = Date.now() - startTime;
 
-    // TODO: Parse and validate response against output schema
-    const parsed = JSON.parse(response);
+    logger.info('Claude processing complete', {
+      processingTimeMs: processingTime,
+      inputTokens: message.usage?.input_tokens,
+      outputTokens: message.usage?.output_tokens
+    });
 
-    logger.info('Meeting processed successfully by Claude');
-    return parsed;
+    return response;
 
   } catch (error) {
-    logger.error('Claude processing error:', error);
+    logger.error('Claude API error:', {
+      error: error.message,
+      statusCode: error.status,
+      type: error.error?.type
+    });
+
+    // Handle specific API errors
+    if (error.status === 429) {
+      throw new Error('Claude API rate limit exceeded. Please try again later.');
+    }
+    if (error.status === 401) {
+      throw new Error('Invalid Claude API key. Please check configuration.');
+    }
+    if (error.status === 400) {
+      throw new Error('Invalid request to Claude API. Check prompt format.');
+    }
+
     throw error;
   }
 }
 
 /**
- * Build prompt for Claude
- * TODO: Import from prompts/meetingProcessor.js
+ * Test Claude connectivity and API key
  */
-function buildPrompt(meetingData, context) {
-  return `Process this meeting data and extract structured information.
+async function testConnection() {
+  try {
+    const response = await client.messages.create({
+      model: 'claude-3-5-sonnet-20241022',
+      max_tokens: 100,
+      messages: [{
+        role: 'user',
+        content: 'Say "OK" if you can read this.',
+      }],
+    });
 
-Meeting Data:
-${JSON.stringify(meetingData, null, 2)}
+    return response.content[0].text.includes('OK');
+  } catch (error) {
+    logger.error('Claude connection test failed:', error);
+    return false;
+  }
+}
 
-Context:
-${JSON.stringify(context, null, 2)}
+/**
+ * Estimate token count for a prompt (rough approximation)
+ */
+function estimateTokens(text) {
+  // Rough estimation: ~4 characters per token
+  return Math.ceil(text.length / 4);
+}
 
-Return structured JSON following the output schema.`;
+/**
+ * Check if prompt is within token limits
+ */
+function checkTokenLimits(prompt) {
+  const estimated = estimateTokens(prompt);
+  const maxInput = 150000; // Claude 3.5 Sonnet max
+
+  if (estimated > maxInput) {
+    logger.warn('Prompt may exceed token limits', {
+      estimated,
+      maxInput
+    });
+    return false;
+  }
+
+  return true;
 }
 
 module.exports = {
   processMeeting,
+  testConnection,
+  estimateTokens,
+  checkTokenLimits
 };

@@ -25,9 +25,9 @@ The AI Agency Development OS has this structure:
 ```
 claude-code-os-implementation/
 ├── 01-executive-office/
-│   ├── internal-business-meetings/    # Partner meetings (Linh, Mikael)
+│   ├── internal-business-meetings/    # Partner meetings (Mekaiel, Chris, Trent)
 │   │   ├── raw-notes/                 # Fathom exports
-│   │   ├── by-partner/                # linh.md, mikael.md
+│   │   ├── by-partner/                # mekaiel.md, chris.md, trent.md
 │   │   ├── action-items/              # active-items.md
 │   │   └── roadmap-updates/           # YYYY-MM.md
 │   └── daily-planning/
@@ -54,17 +54,23 @@ claude-code-os-implementation/
 
 These are the equity partners in the agency:
 
-**Matthew (You/Architect)**
-- Role: Technical Strategy, Prototyping, Scoping, Developer Management
+**Matthew (Architect)**
+- Role: Strong software development, dev systems, company OS development, agency building, prototyping, validation and testing
 - Email patterns: [matthew@..., matt@...]
 
-**Linh**
-- Role: Sales + Client Relationships
-- Email patterns: [linh@...]
+**Mekaiel**
+- Role: Systems, onboarding, sales, content systems + video editing connection
+- Email patterns: [mekaiel@..., mikael@...]
 
-**Mikael**
-- Role: Outbound + Business Development
-- Email patterns: [mikael@..., mekaiel@...]
+**Chris**
+- Role: Systems, onboarding, sales, list of leads management
+- Email patterns: [chris@...]
+
+**Trent (Architect)**
+- Role: Strong software development, development systems, robotics + physical automation, hiring/assessing/onboarding developers, prototyping, validation and testing
+- Email patterns: [trent@...]
+
+Note: The agency is evolving to define and adapt roles to fulfill all demands of a scaling agency.
 
 ---
 
@@ -121,7 +127,7 @@ Analyze this meeting and provide a structured JSON response with the following s
 ### 1. CLASSIFICATION
 
 Determine the meeting type:
-- `internal-partner` → Meeting with Linh and/or Mikael (equity partners)
+- `internal-partner` → Meeting with Mekaiel, Chris, and/or Trent (equity partners)
 - `coaching-call` → Meeting with a known coach
 - `client-call` → Meeting with a known client or about a known project
 - `networking` → Meeting with new contacts / relationship building
@@ -153,7 +159,7 @@ Extract ALL action items from the meeting:
 
 For each action item:
 - Task description (clear, actionable)
-- Owner: Matthew | Linh | Mikael | [External Name]
+- Owner: Matthew | Mekaiel | Chris | Trent | [External Name]
 - Priority:
   - 🔴 `urgent` - Do today or tomorrow
   - 🟡 `important` - Do this week
@@ -253,7 +259,7 @@ Respond with ONLY valid JSON in this exact structure:
   "actionItems": [
     {
       "task": "Clear description of what needs to be done",
-      "owner": "Matthew | Linh | Mikael | External Name",
+      "owner": "Matthew | Mekaiel | Chris | Trent | External Name",
       "priority": "urgent | important | strategic",
       "priorityEmoji": "🔴 | 🟡 | 🟢",
       "deadline": "YYYY-MM-DD or null",

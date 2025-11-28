@@ -1,92 +1,126 @@
 const express = require('express');
 const router = express.Router();
 const logger = require('../utils/logger');
-const config = require('../utils/config');
-const claudeService = require('../services/claude');
-const contextLoader = require('../services/contextLoader');
-const fileManager = require('../services/fileManager');
-const gammaService = require('../services/gamma');
-const notifier = require('../services/notifier');
+const {
+  validateWebhook,
+  validatePayload,
+  checkIdempotency,
+  errorHandler
+} = require('../middleware/validation');
+const { processWebhook, processTestWebhook } = require('../services/processor');
 
-// Webhook verification middleware
-const verifyWebhook = (req, res, next) => {
-  const signature = req.headers['x-fathom-signature'];
+/**
+ * POST /webhook/fathom - Receive Fathom meeting data
+ *
+ * Flow:
+ * 1. Validate webhook signature
+ * 2. Check idempotency
+ * 3. Validate payload structure
+ * 4. Acknowledge receipt immediately
+ * 5. Process asynchronously
+ */
+router.post('/fathom',
+  validateWebhook,
+  checkIdempotency,
+  validatePayload,
+  async (req, res) => {
+    const deliveryId = req.deliveryId;
 
-  if (!signature) {
-    logger.warn('Webhook received without signature');
-    return res.status(401).json({ error: 'Missing signature' });
+    try {
+      logger.info('Webhook received', {
+        deliveryId,
+        meetingId: req.webhookData.meeting?.id,
+        meetingTitle: req.webhookData.meeting?.title
+      });
+
+      // Acknowledge receipt immediately (Fathom expects quick response)
+      res.status(200).json({
+        received: true,
+        deliveryId,
+        timestamp: new Date().toISOString()
+      });
+
+      // Process asynchronously to avoid timeout
+      setImmediate(async () => {
+        try {
+          await processWebhook(req.webhookData, deliveryId);
+        } catch (error) {
+          logger.error('Async processing failed', {
+            deliveryId,
+            error: error.message
+          });
+          // In production, could trigger retry or alert
+        }
+      });
+
+    } catch (error) {
+      logger.error('Webhook handler error:', error);
+      res.status(500).json({
+        error: 'Processing failed',
+        deliveryId
+      });
+    }
+  }
+);
+
+/**
+ * GET /webhook/health - Health check endpoint
+ */
+router.get('/health', (req, res) => {
+  res.json({
+    status: 'healthy',
+    timestamp: new Date().toISOString(),
+    service: 'fathom-webhook'
+  });
+});
+
+/**
+ * POST /webhook/test - Test endpoint for development
+ * Processes a sample webhook without authentication
+ */
+router.post('/test', async (req, res) => {
+  if (process.env.NODE_ENV === 'production') {
+    return res.status(404).json({ error: 'Not found' });
   }
 
-  // TODO: Implement proper signature verification
-  // For now, just check if secret matches
-  if (signature !== config.fathom.webhookSecret) {
-    logger.warn('Invalid webhook signature');
-    return res.status(401).json({ error: 'Invalid signature' });
-  }
-
-  next();
-};
-
-// POST /webhook/fathom - Receive Fathom meeting data
-router.post('/fathom', verifyWebhook, async (req, res) => {
   try {
-    const meetingData = req.body;
+    logger.info('Processing test webhook');
 
-    logger.info('Received Fathom webhook', {
-      meetingId: meetingData.meeting_id,
-      title: meetingData.title,
-    });
+    const result = await processTestWebhook();
 
-    // Acknowledge receipt immediately
-    res.status(200).json({ status: 'received' });
-
-    // Process asynchronously
-    processMeeting(meetingData).catch(err => {
-      logger.error('Error processing meeting:', err);
+    res.json({
+      success: true,
+      message: 'Test webhook processed',
+      result
     });
 
   } catch (error) {
-    logger.error('Webhook handler error:', error);
-    res.status(500).json({ error: 'Processing failed' });
+    logger.error('Test webhook failed:', error);
+    res.status(500).json({
+      error: 'Test processing failed',
+      message: error.message
+    });
   }
 });
 
-// Process meeting (async)
-async function processMeeting(meetingData) {
-  logger.info('Processing meeting:', meetingData.meeting_id);
+/**
+ * GET /webhook/status/:deliveryId - Check webhook processing status
+ * (Optional: implement if you store processing status)
+ */
+router.get('/status/:deliveryId', (req, res) => {
+  const { deliveryId } = req.params;
 
-  try {
-    // 1. Load OS context (contacts, projects, etc.)
-    logger.info('Loading OS context...');
-    const context = await contextLoader.loadContext();
+  // Check if processed (using global store for now)
+  const isProcessed = global.processedDeliveries?.has(deliveryId);
 
-    // 2. Process with Claude AI
-    logger.info('Processing with Claude AI...');
-    const processedData = await claudeService.processMeeting(meetingData, context);
+  res.json({
+    deliveryId,
+    processed: isProcessed,
+    timestamp: new Date().toISOString()
+  });
+});
 
-    // 3. Update files in AI Agency OS
-    logger.info('Updating files...');
-    await fileManager.updateFiles(processedData);
-
-    // 4. Create Gamma presentation
-    logger.info('Creating Gamma presentation...');
-    const presentation = await gammaService.createPresentation(processedData);
-
-    // Add presentation URL to processed data for notification
-    if (presentation) {
-      processedData.presentationUrl = presentation.url;
-      processedData.presentationId = presentation.id;
-    }
-
-    // 5. Send Slack notification
-    logger.info('Sending notification...');
-    await notifier.notify(processedData);
-
-    logger.info('Meeting processing complete:', meetingData.meeting_id);
-  } catch (error) {
-    logger.error('Error in meeting processing pipeline:', error);
-    throw error;
-  }
-}
+// Error handler middleware (must be last)
+router.use(errorHandler);
 
 module.exports = router;

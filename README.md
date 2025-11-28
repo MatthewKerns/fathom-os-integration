@@ -47,7 +47,7 @@ npm start
 ## Project Structure
 
 ```
-fathom-integration/
+fathom-os-integration/
 ├── src/
 │   ├── index.js              # Entry point
 │   ├── server.js             # Express server

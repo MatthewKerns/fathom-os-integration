@@ -24,12 +24,12 @@ This shows a complete example of how an internal partner meeting would be proces
       "is_host": true
     },
     {
-      "name": "Linh Nguyen",
-      "email": "linh@agency.com",
+      "name": "Chris",
+      "email": "chris@agency.com",
       "is_host": false
     }
   ],
-  "summary": "Weekly sync between Matthew and Linh covering pipeline status, Trevor project completion, and Emma opportunity. Decided to prioritize closing current deals before expanding outreach.",
+  "summary": "Weekly sync between Matthew and Chris covering pipeline status, Trevor project completion, and Emma opportunity. Decided to prioritize closing current deals before expanding outreach.",
   "key_topics": [
     "Pipeline review",
     "Trevor P1 invoice",
@@ -47,7 +47,7 @@ This shows a complete example of how an internal partner meeting would be proces
     },
     {
       "text": "Update pipeline tracker",
-      "assignee": "Linh"
+      "assignee": "Chris"
     }
   ],
   "transcript": [
@@ -55,10 +55,10 @@ This shows a complete example of how an internal partner meeting would be proces
       "speaker": "Matthew Kerns",
       "start_time": 0.0,
       "end_time": 8.0,
-      "text": "Hey Linh, let's go through the pipeline. How's everything looking?"
+      "text": "Hey Chris, let's go through the pipeline. How's everything looking?"
     },
     {
-      "speaker": "Linh Nguyen",
+      "speaker": "Chris",
       "start_time": 8.0,
       "end_time": 22.0,
       "text": "Good! So Trevor is ready - he approved the work verbally. We just need to send the invoice for the $500 P1 deliverable."
@@ -70,7 +70,7 @@ This shows a complete example of how an internal partner meeting would be proces
       "text": "Perfect, I'll follow up with him today about the invoice. What about Emma?"
     },
     {
-      "speaker": "Linh Nguyen",
+      "speaker": "Chris",
       "start_time": 35.0,
       "end_time": 55.0,
       "text": "Emma's interested in the email automation project. She mentioned she wants something in the $2-5k range. I have a call with her Tuesday."
@@ -82,7 +82,7 @@ This shows a complete example of how an internal partner meeting would be proces
       "text": "Got it. I should prep a proposal before that call. What about new leads - should Mikael keep pushing outreach?"
     },
     {
-      "speaker": "Linh Nguyen",
+      "speaker": "Chris",
       "start_time": 75.0,
       "end_time": 95.0,
       "text": "I think we should focus on closing Trevor and Emma first. Better to close what we have than chase new ones."
@@ -106,7 +106,7 @@ This shows a complete example of how an internal partner meeting would be proces
   "classification": {
     "type": "internal-partner",
     "confidence": 0.98,
-    "reasoning": "Meeting between Matthew and Linh (equity partner with Sales role) discussing internal pipeline and strategy"
+    "reasoning": "Meeting between Matthew and Chris (equity partner with Sales role) discussing internal pipeline and strategy"
   },
 
   "attendees": [
@@ -121,8 +121,8 @@ This shows a complete example of how an internal partner meeting would be proces
       "newInfoLearned": []
     },
     {
-      "name": "Linh Nguyen",
-      "email": "linh@agency.com",
+      "name": "Chris",
+      "email": "chris@agency.com",
       "role": "Sales Lead",
       "company": "AI Agency",
       "isKnownContact": true,
@@ -150,11 +150,11 @@ This shows a complete example of how an internal partner meeting would be proces
       "priority": "important",
       "priorityEmoji": "🟡",
       "deadline": "2025-12-01",
-      "context": "Linh has discovery call with Emma on Tuesday, proposal needed beforehand"
+      "context": "Chris has discovery call with Emma on Tuesday, proposal needed beforehand"
     },
     {
       "task": "Update pipeline tracker with current deal statuses (Trevor, Emma)",
-      "owner": "Linh",
+      "owner": "Chris",
       "priority": "important",
       "priorityEmoji": "🟡",
       "deadline": null,
@@ -199,12 +199,12 @@ This shows a complete example of how an internal partner meeting would be proces
     {
       "action": "create",
       "path": "claude-code-os-implementation/01-executive-office/internal-business-meetings/raw-notes/2025-11-27-weekly-sync.md",
-      "content": "# Internal Meeting: Weekly Partner Sync - 2025-11-27\n\n**Date:** 2025-11-27\n**Attendees:** Matthew, Linh\n**Duration:** 30 minutes\n**Meeting Type:** Internal Partner\n**Status:** [x] Processed\n**Fathom Link:** https://fathom.video/share/example123\n\n---\n\n## Summary\n\nWeekly sync covering pipeline status. Trevor P1 ready for invoice ($500). Emma interested in $2-5k email automation project - Linh has call Tuesday. Decided to pause new outreach and focus on closing current deals.\n\n---\n\n## Key Topics\n\n- Pipeline review\n- Trevor P1 invoice ($500)\n- Emma proposal preparation\n- Outreach focus strategy\n\n---\n\n## Action Items\n\n- 🔴 **Matthew:** Follow up with Trevor re: $500 invoice (today)\n- 🟡 **Matthew:** Send Emma proposal before Tuesday\n- 🟡 **Matthew:** Notify Mikael to pause cold outreach\n- 🟡 **Linh:** Update pipeline tracker\n\n---\n\n## Decisions\n\n1. **Pause cold outreach** - Focus on closing Trevor and Emma before new leads\n   - Reasoning: Better conversion with warm leads, full attention per deal\n   - Implication: Notify Mikael to pause outreach\n\n---\n\n**Processed on:** 2025-11-27\n**Auto-processed by:** Fathom Integration\n"
+      "content": "# Internal Meeting: Weekly Partner Sync - 2025-11-27\n\n**Date:** 2025-11-27\n**Attendees:** Matthew, Chris\n**Duration:** 30 minutes\n**Meeting Type:** Internal Partner\n**Status:** [x] Processed\n**Fathom Link:** https://fathom.video/share/example123\n\n---\n\n## Summary\n\nWeekly sync covering pipeline status. Trevor P1 ready for invoice ($500). Emma interested in $2-5k email automation project - Chris has call Tuesday. Decided to pause new outreach and focus on closing current deals.\n\n---\n\n## Key Topics\n\n- Pipeline review\n- Trevor P1 invoice ($500)\n- Emma proposal preparation\n- Outreach focus strategy\n\n---\n\n## Action Items\n\n- 🔴 **Matthew:** Follow up with Trevor re: $500 invoice (today)\n- 🟡 **Matthew:** Send Emma proposal before Tuesday\n- 🟡 **Matthew:** Notify Mikael to pause cold outreach\n- 🟡 **Chris:** Update pipeline tracker\n\n---\n\n## Decisions\n\n1. **Pause cold outreach** - Focus on closing Trevor and Emma before new leads\n   - Reasoning: Better conversion with warm leads, full attention per deal\n   - Implication: Notify Mikael to pause outreach\n\n---\n\n**Processed on:** 2025-11-27\n**Auto-processed by:** Fathom Integration\n"
     },
     {
       "action": "append",
       "path": "claude-code-os-implementation/01-executive-office/internal-business-meetings/by-partner/linh.md",
-      "content": "\n---\n\n## 2025-11-27 - Weekly Partner Sync\n\n**Attendees:** Matthew, Linh\n**Meeting type:** Weekly Sync\n\n**Key Decisions:**\n1. Pause cold outreach, focus on closing Trevor + Emma\n\n**Linh's Action Items:**\n- [ ] Update pipeline tracker\n\n**Updates from Linh:**\n- Trevor approved P1, ready for invoice\n- Emma interested in $2-5k email automation\n- Has call with Emma scheduled for Tuesday\n- Recommends focusing on existing pipeline\n\n**Next steps:**\n- Sync after Emma call next week\n\n**Raw notes:** `raw-notes/2025-11-27-weekly-sync.md`\n"
+      "content": "\n---\n\n## 2025-11-27 - Weekly Partner Sync\n\n**Attendees:** Matthew, Chris\n**Meeting type:** Weekly Sync\n\n**Key Decisions:**\n1. Pause cold outreach, focus on closing Trevor + Emma\n\n**Chris's Action Items:**\n- [ ] Update pipeline tracker\n\n**Updates from Chris:**\n- Trevor approved P1, ready for invoice\n- Emma interested in $2-5k email automation\n- Has call with Emma scheduled for Tuesday\n- Recommends focusing on existing pipeline\n\n**Next steps:**\n- Sync after Emma call next week\n\n**Raw notes:** `raw-notes/2025-11-27-weekly-sync.md`\n"
     },
     {
       "action": "update_section",
@@ -216,7 +216,7 @@ This shows a complete example of how an internal partner meeting would be proces
       "action": "update_section",
       "path": "claude-code-os-implementation/01-executive-office/internal-business-meetings/action-items/active-items.md",
       "section": "🟡 Important (This Week)",
-      "content": "| 2025-11-27 | Matthew | Send Emma proposal before Tuesday | 2025-12-01 | [ ] |\n| 2025-11-27 | Matthew | Notify Mikael to pause cold outreach | 2025-11-28 | [ ] |\n| 2025-11-27 | Linh | Update pipeline tracker | - | [ ] |"
+      "content": "| 2025-11-27 | Matthew | Send Emma proposal before Tuesday | 2025-12-01 | [ ] |\n| 2025-11-27 | Matthew | Notify Mikael to pause cold outreach | 2025-11-28 | [ ] |\n| 2025-11-27 | Chris | Update pipeline tracker | - | [ ] |"
     }
   ],
 
@@ -229,7 +229,7 @@ This shows a complete example of how an internal partner meeting would be proces
   },
 
   "notifications": {
-    "slackSummary": "📝 *Meeting Processed: Weekly Partner Sync*\n\n*Type:* Internal Partner Meeting\n*Attendees:* Matthew, Linh\n*Duration:* 30 min\n\n🔴 *Urgent Actions:*\n• Follow up with Trevor re: $500 invoice → Matthew (today)\n\n🟡 *This Week:*\n• Send Emma proposal → Matthew (before Tuesday)\n• Notify Mikael to pause outreach → Matthew\n• Update pipeline tracker → Linh\n\n📋 *Decisions:*\n• Pause cold outreach, focus on current pipeline\n\n📁 *Files Updated:* 3\n• raw-notes/2025-11-27-weekly-sync.md (created)\n• by-partner/linh.md (updated)\n• action-items/active-items.md (updated)",
+    "slackSummary": "📝 *Meeting Processed: Weekly Partner Sync*\n\n*Type:* Internal Partner Meeting\n*Attendees:* Matthew, Chris\n*Duration:* 30 min\n\n🔴 *Urgent Actions:*\n• Follow up with Trevor re: $500 invoice → Matthew (today)\n\n🟡 *This Week:*\n• Send Emma proposal → Matthew (before Tuesday)\n• Notify Mikael to pause outreach → Matthew\n• Update pipeline tracker → Chris\n\n📋 *Decisions:*\n• Pause cold outreach, focus on current pipeline\n\n📁 *Files Updated:* 3\n• raw-notes/2025-11-27-weekly-sync.md (created)\n• by-partner/linh.md (updated)\n• action-items/active-items.md (updated)",
     "urgentAlert": "🚨 *Urgent Action Required*\n\nFrom Weekly Partner Sync:\n\n• Follow up with Trevor re: $500 P1 invoice\n  → Due: Today (2025-11-27)\n  → Why: Trevor approved work verbally, ready for payment"
   }
 }
@@ -245,7 +245,7 @@ This shows a complete example of how an internal partner meeting would be proces
 # Internal Meeting: Weekly Partner Sync - 2025-11-27
 
 **Date:** 2025-11-27
-**Attendees:** Matthew, Linh
+**Attendees:** Matthew, Chris
 **Duration:** 30 minutes
 **Meeting Type:** Internal Partner
 **Status:** [x] Processed
@@ -255,7 +255,7 @@ This shows a complete example of how an internal partner meeting would be proces
 
 ## Summary
 
-Weekly sync covering pipeline status. Trevor P1 ready for invoice ($500). Emma interested in $2-5k email automation project - Linh has call Tuesday. Decided to pause new outreach and focus on closing current deals.
+Weekly sync covering pipeline status. Trevor P1 ready for invoice ($500). Emma interested in $2-5k email automation project - Chris has call Tuesday. Decided to pause new outreach and focus on closing current deals.
 
 ---
 
@@ -273,7 +273,7 @@ Weekly sync covering pipeline status. Trevor P1 ready for invoice ($500). Emma i
 - 🔴 **Matthew:** Follow up with Trevor re: $500 invoice (today)
 - 🟡 **Matthew:** Send Emma proposal before Tuesday
 - 🟡 **Matthew:** Notify Mikael to pause cold outreach
-- 🟡 **Linh:** Update pipeline tracker
+- 🟡 **Chris:** Update pipeline tracker
 
 ---
 
@@ -296,16 +296,16 @@ Weekly sync covering pipeline status. Trevor P1 ready for invoice ($500). Emma i
 
 ## 2025-11-27 - Weekly Partner Sync
 
-**Attendees:** Matthew, Linh
+**Attendees:** Matthew, Chris
 **Meeting type:** Weekly Sync
 
 **Key Decisions:**
 1. Pause cold outreach, focus on closing Trevor + Emma
 
-**Linh's Action Items:**
+**Chris's Action Items:**
 - [ ] Update pipeline tracker
 
-**Updates from Linh:**
+**Updates from Chris:**
 - Trevor approved P1, ready for invoice
 - Emma interested in $2-5k email automation
 - Has call with Emma scheduled for Tuesday
@@ -323,7 +323,7 @@ Weekly sync covering pipeline status. Trevor P1 ready for invoice ($500). Emma i
 📝 Meeting Processed: Weekly Partner Sync
 
 Type: Internal Partner Meeting
-Attendees: Matthew, Linh
+Attendees: Matthew, Chris
 Duration: 30 min
 
 🔴 Urgent Actions:
@@ -332,7 +332,7 @@ Duration: 30 min
 🟡 This Week:
 • Send Emma proposal → Matthew (before Tuesday)
 • Notify Mikael to pause outreach → Matthew
-• Update pipeline tracker → Linh
+• Update pipeline tracker → Chris
 
 📋 Decisions:
 • Pause cold outreach, focus on current pipeline

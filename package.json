@@ -1,5 +1,5 @@
 {
-  "name": "fathom-integration",
+  "name": "fathom-os-integration",
   "version": "1.0.0",
   "description": "Automatically process Fathom meeting notes and integrate into AI Agency Development OS",
   "main": "src/index.js",

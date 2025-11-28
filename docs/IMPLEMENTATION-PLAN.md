@@ -391,7 +391,7 @@ const path = require('path');
 
 // Load the prompt template from the OS documentation
 // In production, this would read from:
-// 05-hr-department/fathom-integration/prompts/MEETING-PROCESSOR.md
+// 05-hr-department/fathom-os-integration/prompts/MEETING-PROCESSOR.md
 
 function buildPrompt(webhookPayload, context) {
   const { meeting, attendees, summary, action_items, transcript } = webhookPayload;

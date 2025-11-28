@@ -15,7 +15,7 @@
 The npm install timed out during setup. Run manually:
 
 ```bash
-cd ~/workspace/fathom-integration
+cd ~/workspace/fathom-os-integration
 
 # Install in batches if needed
 npm install express dotenv

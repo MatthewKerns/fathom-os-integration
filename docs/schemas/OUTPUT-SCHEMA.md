@@ -38,7 +38,7 @@ interface Attendee {
 
 interface ActionItem {
   task: string;
-  owner: 'Matthew' | 'Linh' | 'Mikael' | string; // string for external names
+  owner: 'Matthew' | 'Mekaiel' | 'Chris' | 'Trent' | string; // string for external names
   priority: 'urgent' | 'important' | 'strategic';
   priorityEmoji: '🔴' | '🟡' | '🟢';
   deadline: string | null; // YYYY-MM-DD format
@@ -99,7 +99,7 @@ interface Notifications {
   "classification": {
     "type": "internal-partner",
     "confidence": 0.98,
-    "reasoning": "Meeting includes Linh (Sales partner) and discusses pipeline/deal strategy"
+    "reasoning": "Meeting includes Chris (Sales partner) and discusses pipeline/deal strategy"
   },
 
   "attendees": [
@@ -114,12 +114,12 @@ interface Notifications {
       "newInfoLearned": []
     },
     {
-      "name": "Linh Nguyen",
-      "email": "linh@example.com",
-      "role": "Sales Lead",
+      "name": "Chris",
+      "email": "chris@example.com",
+      "role": "Sales & Systems",
       "company": "AI Agency",
       "isKnownContact": true,
-      "contactFilePath": "01-executive-office/internal-business-meetings/by-partner/linh.md",
+      "contactFilePath": "01-executive-office/internal-business-meetings/by-partner/chris.md",
       "suggestedCategory": null,
       "newInfoLearned": [
         "Has call scheduled with Emma next Tuesday",
@@ -143,11 +143,11 @@ interface Notifications {
       "priority": "important",
       "priorityEmoji": "🟡",
       "deadline": "2025-11-29",
-      "context": "Emma showed strong interest, Linh has call scheduled for Tuesday"
+      "context": "Emma showed strong interest, Chris has call scheduled for Tuesday"
     },
     {
       "task": "Update pipeline tracker with current deal statuses",
-      "owner": "Linh",
+      "owner": "Chris",
       "priority": "important",
       "priorityEmoji": "🟡",
       "deadline": null,
@@ -192,12 +192,12 @@ interface Notifications {
     {
       "action": "create",
       "path": "claude-code-os-implementation/01-executive-office/internal-business-meetings/raw-notes/2025-11-27-pipeline-review.md",
-      "content": "# Internal Meeting: Pipeline Review - 2025-11-27\n\n**Date:** 2025-11-27\n**Attendees:** Matthew, Linh\n**Duration:** 27 minutes\n**Meeting Type:** Internal Partner\n**Status:** [x] Processed\n**Fathom Link:** https://fathom.video/share/abc123xyz\n\n---\n\n## Summary\n\nReviewed current pipeline status with focus on Trevor P1 completion and Emma opportunity. Decided to focus on closing current deals before expanding outreach.\n\n---\n\n## Key Topics\n\n- Trevor invoice collection\n- Emma proposal preparation\n- Pipeline prioritization strategy\n\n---\n\n## Action Items\n\n- 🔴 **Matthew:** Follow up with Trevor re: invoice (due: 2025-11-28)\n- 🟡 **Matthew:** Send Emma proposal (due: 2025-11-29)\n- 🟡 **Linh:** Update pipeline tracker\n\n---\n\n## Decisions\n\n1. **Focus current pipeline over new leads** - Close Trevor and Emma before new outreach\n\n---\n\n## Processed\n\n**Processed on:** 2025-11-27\n**Auto-processed by:** Fathom Integration\n"
+      "content": "# Internal Meeting: Pipeline Review - 2025-11-27\n\n**Date:** 2025-11-27\n**Attendees:** Matthew, Chris\n**Duration:** 27 minutes\n**Meeting Type:** Internal Partner\n**Status:** [x] Processed\n**Fathom Link:** https://fathom.video/share/abc123xyz\n\n---\n\n## Summary\n\nReviewed current pipeline status with focus on Trevor P1 completion and Emma opportunity. Decided to focus on closing current deals before expanding outreach.\n\n---\n\n## Key Topics\n\n- Trevor invoice collection\n- Emma proposal preparation\n- Pipeline prioritization strategy\n\n---\n\n## Action Items\n\n- 🔴 **Matthew:** Follow up with Trevor re: invoice (due: 2025-11-28)\n- 🟡 **Matthew:** Send Emma proposal (due: 2025-11-29)\n- 🟡 **Chris:** Update pipeline tracker\n\n---\n\n## Decisions\n\n1. **Focus current pipeline over new leads** - Close Trevor and Emma before new outreach\n\n---\n\n## Processed\n\n**Processed on:** 2025-11-27\n**Auto-processed by:** Fathom Integration\n"
     },
     {
       "action": "append",
-      "path": "claude-code-os-implementation/01-executive-office/internal-business-meetings/by-partner/linh.md",
-      "content": "\n---\n\n## 2025-11-27 - Pipeline Review\n\n**Attendees:** Matthew, Linh\n**Meeting type:** Weekly Sync\n\n**Key Decisions:**\n1. Focus on closing Trevor and Emma before new leads\n\n**Linh's Action Items:**\n- [ ] Update pipeline tracker\n\n**Updates from Linh:**\n- Has call scheduled with Emma next Tuesday\n- Prefers async Slack updates over additional calls\n\n**Next steps:**\n- Linh to update pipeline by EOD\n- Sync after Emma call next week\n\n**Raw notes:** `raw-notes/2025-11-27-pipeline-review.md`\n"
+      "path": "claude-code-os-implementation/01-executive-office/internal-business-meetings/by-partner/chris.md",
+      "content": "\n---\n\n## 2025-11-27 - Pipeline Review\n\n**Attendees:** Matthew, Chris\n**Meeting type:** Weekly Sync\n\n**Key Decisions:**\n1. Focus on closing Trevor and Emma before new leads\n\n**Chris's Action Items:**\n- [ ] Update pipeline tracker\n\n**Updates from Chris:**\n- Has call scheduled with Emma next Tuesday\n- Prefers async Slack updates over additional calls\n\n**Next steps:**\n- Chris to update pipeline by EOD\n- Sync after Emma call next week\n\n**Raw notes:** `raw-notes/2025-11-27-pipeline-review.md`\n"
     },
     {
       "action": "update_section",
@@ -209,12 +209,12 @@ interface Notifications {
       "action": "update_section",
       "path": "claude-code-os-implementation/01-executive-office/internal-business-meetings/action-items/active-items.md",
       "section": "🟡 Important (This Week)",
-      "content": "| 2025-11-27 | Matthew | Send Emma proposal | 2025-11-29 | [ ] |\n| 2025-11-27 | Linh | Update pipeline tracker | - | [ ] |"
+      "content": "| 2025-11-27 | Matthew | Send Emma proposal | 2025-11-29 | [ ] |\n| 2025-11-27 | Chris | Update pipeline tracker | - | [ ] |"
     }
   ],
 
   "summary": {
-    "oneLineSummary": "Pipeline review with Linh - focusing on closing Trevor and Emma before new outreach",
+    "oneLineSummary": "Pipeline review with Chris - focusing on closing Trevor and Emma before new outreach",
     "urgentItemsCount": 1,
     "totalActionItems": 3,
     "newContactsIdentified": 0,
@@ -222,8 +222,8 @@ interface Notifications {
   },
 
   "notifications": {
-    "slackSummary": "📝 *Meeting Processed: Pipeline Review*\n\n*Type:* Internal Partner Meeting\n*Attendees:* Matthew, Linh\n*Duration:* 27 min\n\n🔴 *Urgent Actions:*\n• Follow up with Trevor re: invoice → Matthew (due tomorrow)\n\n🟡 *This Week:*\n• Send Emma proposal → Matthew\n• Update pipeline tracker → Linh\n\n📁 *Files Updated:* 3\n• raw-notes/2025-11-27-pipeline-review.md (created)\n• by-partner/linh.md (updated)\n• action-items/active-items.md (updated)",
-    "urgentAlert": "🚨 *Urgent Action Required*\n\nFrom today's pipeline review with Linh:\n\n• Follow up with Trevor re: $500 invoice\n  → Due: Tomorrow (2025-11-28)\n  → Why: Payment collection for completed P1 work"
+    "slackSummary": "📝 *Meeting Processed: Pipeline Review*\n\n*Type:* Internal Partner Meeting\n*Attendees:* Matthew, Chris\n*Duration:* 27 min\n\n🔴 *Urgent Actions:*\n• Follow up with Trevor re: invoice → Matthew (due tomorrow)\n\n🟡 *This Week:*\n• Send Emma proposal → Matthew\n• Update pipeline tracker → Chris\n\n📁 *Files Updated:* 3\n• raw-notes/2025-11-27-pipeline-review.md (created)\n• by-partner/chris.md (updated)\n• action-items/active-items.md (updated)",
+    "urgentAlert": "🚨 *Urgent Action Required*\n\nFrom today's pipeline review with Chris:\n\n• Follow up with Trevor re: $500 invoice\n  → Due: Tomorrow (2025-11-28)\n  → Why: Payment collection for completed P1 work"
   }
 }
 ```
@@ -244,7 +244,7 @@ interface Notifications {
 
 ### Action Items
 - `task` must be specific and actionable (not vague)
-- `owner` must be one of: Matthew, Linh, Mikael, or specific external name
+- `owner` must be one of: Matthew, Mekaiel, Chris, Trent, or specific external name
 - `priority` and `priorityEmoji` must match
 - `deadline` must be YYYY-MM-DD format or null
 
