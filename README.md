@@ -1,6 +1,6 @@
 # Fathom OS Integration
 
-Automatically process Fathom meeting recordings and integrate structured notes directly into your AI Agency Development OS. This system uses Claude AI to analyze meetings, extract action items, update project files, and notify your team—saving ~45 minutes of manual work per meeting.
+Automatically process Fathom meeting recordings and integrate structured notes directly into your Company Operating System. This system uses Claude AI to analyze meetings, extract action items, update project files, and notify your team—saving ~45 minutes of manual work per meeting.
 
 ## 🎯 What This Does
 
@@ -10,7 +10,7 @@ When a Fathom meeting recording completes, this integration:
 2. **Analyzes with Claude AI** to classify meeting type and extract structured data
 3. **Updates your OS files** automatically:
    - Creates meeting notes in appropriate directories
-   - Updates partner-specific files for internal meetings
+   - Updates team member files for internal meetings
    - Tracks action items by priority (🔴 urgent, 🟡 important, 🟢 strategic)
    - Adds roadmap items and decisions
 4. **Creates Gamma presentation** (optional) with meeting insights
@@ -24,7 +24,7 @@ When a Fathom meeting recording completes, this integration:
 - File management system
 - Schema validation
 - Context loading from OS
-- Partner structure configured
+- Team structure configured
 
 **Ready for:** API key configuration and deployment
 
@@ -33,7 +33,7 @@ When a Fathom meeting recording completes, this integration:
 ### Prerequisites
 
 - Node.js 18+
-- Git repository with your AI Agency OS
+- Git repository with your Company OS
 - Fathom account with webhook access
 - Required API keys (see below)
 
@@ -64,7 +64,7 @@ nano .env  # or use your preferred editor
 |-----|---------|-------------|
 | `ANTHROPIC_API_KEY` | Claude AI processing | [console.anthropic.com](https://console.anthropic.com/settings/keys) |
 | `FATHOM_WEBHOOK_SECRET` | Webhook verification | Fathom Settings → Webhooks |
-| `OS_PATH` | Path to your AI Agency OS | Local directory path |
+| `OS_PATH` | Path to your Company OS | Local directory path |
 
 **Optional Enhancements:**
 
@@ -74,7 +74,28 @@ nano .env  # or use your preferred editor
 | `GAMMA_API_KEY` | Generate presentations | [gamma.app](https://gamma.app) (Pro required) |
 | `SLACK_WEBHOOK_URL` | Team notifications | [api.slack.com/apps](https://api.slack.com/apps) |
 
-### Step 3: Test Your Setup
+### Step 3: Configure Your Team
+
+Edit `src/services/contextLoader.js` to add your team members:
+
+```javascript
+// Replace with your company's team structure
+return {
+  john: {
+    email: 'john@company.com',
+    role: 'CEO',
+    name: 'John Smith'
+  },
+  sarah: {
+    email: 'sarah@company.com',
+    role: 'CTO',
+    name: 'Sarah Johnson'
+  },
+  // Add more team members as needed
+};
+```
+
+### Step 4: Test Your Setup
 
 ```bash
 # Run the test suite
@@ -88,7 +109,7 @@ node test.js
 # ✅ OS Context (if OS_PATH correct)
 ```
 
-### Step 4: Start the Server
+### Step 5: Start the Server
 
 ```bash
 # Development mode (with auto-reload)
@@ -100,7 +121,7 @@ npm start
 # Server runs on http://localhost:3000
 ```
 
-### Step 5: Configure Fathom Webhook
+### Step 6: Configure Fathom Webhook
 
 1. Go to Fathom → Settings → Integrations → Webhooks
 2. Click "Add Webhook"
@@ -109,7 +130,7 @@ npm start
 5. Add it to your `.env` as `FATHOM_WEBHOOK_SECRET`
 6. Save and test with a meeting
 
-### Step 6: Test with Sample Data
+### Step 7: Test with Sample Data
 
 ```bash
 # Test webhook processing without a real meeting
@@ -118,23 +139,53 @@ curl -X POST http://localhost:3000/webhook/test
 
 ## 📁 How Files Are Organized
 
-The integration creates and updates files in your AI Agency OS based on meeting type:
+The integration creates and updates files in your Company OS based on meeting type:
 
-| Meeting Type | Files Created/Updated |
-|--------------|----------------------|
-| **Internal Partner** | • `01-executive-office/internal-business-meetings/raw-notes/YYYY-MM-DD-topic.md`<br>• `by-partner/{partner}.md`<br>• `action-items/active-items.md` |
-| **Coaching Call** | • `05-hr-department/network-contacts/coaching-call-notes/raw-notes/`<br>• `by-coach/{coach}.md` |
-| **Client Call** | • `02-operations/project-management/active-projects/{project}.md` |
-| **Networking** | • `05-hr-department/network-contacts/by-category/{category}/{name}.md` |
+| Meeting Type | Files Created/Updated | Use Case |
+|--------------|----------------------|----------|
+| **Internal Team** | • `executive/meetings/raw-notes/YYYY-MM-DD-topic.md`<br>• `team/{member}.md`<br>• `action-items/active-items.md` | Team syncs, planning sessions |
+| **Client/Customer** | • `clients/{client-name}/meetings/YYYY-MM-DD.md`<br>• `projects/{project}.md` | Client calls, project updates |
+| **Vendor/Partner** | • `vendors/{vendor-name}/meetings/YYYY-MM-DD.md` | Vendor discussions, partnerships |
+| **Interview** | • `hr/interviews/{candidate-name}-YYYY-MM-DD.md` | Recruitment, hiring |
+| **Board/Investor** | • `board/meetings/YYYY-MM-DD.md`<br>• `board/action-items.md` | Board meetings, investor updates |
 
-## 👥 Equity Partners
+## 🏢 Customizing for Your Company
 
-The system recognizes these equity partners for internal meeting classification:
+### Directory Structure
 
-- **Matthew** (Architect) - Software development, OS development, agency building, prototyping
-- **Trent** (Architect) - Software development, robotics, automation, developer hiring/onboarding
-- **Mekaiel** - Systems, onboarding, sales, content systems, video editing
-- **Chris** - Systems, onboarding, sales, lead management
+Modify `src/prompts/meetingProcessor.js` to match your company's file structure:
+
+```javascript
+// Example: Customize your OS structure
+company-os/
+├── executive/           # Leadership & strategy
+├── operations/         # Day-to-day operations
+├── sales/             # Sales & revenue
+├── engineering/       # Product & development
+├── hr/               # People & culture
+├── finance/          # Financial management
+└── clients/          # Customer relationships
+```
+
+### Meeting Types
+
+Configure meeting classifications in `src/prompts/meetingProcessor.js`:
+
+```javascript
+// Customize meeting types for your company
+- 'internal-team'     // Team meetings
+- 'client-meeting'    // Customer calls
+- 'sales-call'        // Sales opportunities
+- 'vendor-meeting'    // Supplier/partner discussions
+- 'interview'         // Hiring interviews
+- 'board-meeting'     // Board/investor meetings
+- 'training'          // Training sessions
+- 'review'            // Performance/project reviews
+```
+
+### Action Item Owners
+
+Update valid owners in `src/schemas/outputSchema.js` to match your team.
 
 ## 🔧 Configuration Details
 
@@ -144,11 +195,11 @@ The system recognizes these equity partners for internal meeting classification:
 # Core Requirements
 ANTHROPIC_API_KEY=sk-ant-api03-...  # Claude API for processing
 FATHOM_WEBHOOK_SECRET=fws_...        # From Fathom webhook settings
-OS_PATH=/path/to/your/ai-agency-os   # Local path to your OS repo
+OS_PATH=/path/to/your/company-os     # Local path to your OS repo
 
 # Optional but Recommended
 GITHUB_TOKEN=ghp_...                 # For auto-committing changes
-GITHUB_REPO=YourName/ai-agency-os    # Your OS repository
+GITHUB_REPO=YourCompany/company-os   # Your OS repository
 GAMMA_API_KEY=sk-gamma-...           # For presentations (Pro required)
 SLACK_WEBHOOK_URL=https://hooks...   # For team notifications
 ```
@@ -163,7 +214,7 @@ LOG_LEVEL=info              # debug, info, warn, error
 
 # Git Configuration
 GIT_AUTHOR_NAME=Fathom Bot
-GIT_AUTHOR_EMAIL=bot@your-agency.com
+GIT_AUTHOR_EMAIL=bot@your-company.com
 ```
 
 ## 📊 What Gets Processed
@@ -173,9 +224,38 @@ From each meeting, the system extracts:
 - **Classification** - Meeting type with confidence score
 - **Attendees** - Names, emails, roles, new information learned
 - **Action Items** - Owner, priority, deadline, context
-- **Roadmap Items** - New initiatives, features, priorities
 - **Decisions** - What was decided and why
-- **Key Learnings** - About people, projects, market, strategy
+- **Next Steps** - Follow-ups and future actions
+- **Key Topics** - Main discussion points
+- **Risks/Issues** - Problems identified
+- **Opportunities** - Business opportunities discussed
+
+## 🎯 Use Cases by Department
+
+### Executive Team
+- Strategic planning sessions → Update strategy docs
+- Leadership meetings → Track decisions and initiatives
+- Board prep → Compile board materials
+
+### Sales
+- Customer calls → Update CRM records
+- Pipeline reviews → Track deal progress
+- QBRs → Generate account summaries
+
+### Engineering
+- Sprint planning → Update project trackers
+- Architecture reviews → Document technical decisions
+- Incident reviews → Create postmortems
+
+### HR
+- Interviews → Standardized interview notes
+- Performance reviews → Track feedback
+- Team meetings → Culture initiatives
+
+### Finance
+- Budget reviews → Track spending decisions
+- Vendor negotiations → Document terms
+- Audit meetings → Compliance tracking
 
 ## 🚨 Troubleshooting
 
@@ -186,8 +266,8 @@ From each meeting, the system extracts:
 - Get one at [console.anthropic.com](https://console.anthropic.com)
 
 **"Cannot find OS path"**
-- Update `OS_PATH` in `.env` to absolute path of your AI Agency OS
-- Example: `/Users/yourname/workspace/ai-agency-development-os`
+- Update `OS_PATH` in `.env` to absolute path of your Company OS
+- Example: `/Users/yourname/workspace/company-os`
 
 **"Invalid webhook signature"**
 - Ensure `FATHOM_WEBHOOK_SECRET` matches exactly from Fathom settings
@@ -212,11 +292,6 @@ tail -f logs/combined.log
 
 ## 🛠 Development
 
-### Running Tests
-```bash
-node test.js  # Comprehensive test suite
-```
-
 ### File Structure
 ```
 fathom-os-integration/
@@ -232,11 +307,11 @@ fathom-os-integration/
 └── test.js              # Test suite
 ```
 
-### Key Files
-- `src/services/processor.js` - Main orchestration
-- `src/prompts/meetingProcessor.js` - Claude prompt builder
-- `src/schemas/outputSchema.js` - Response validation
-- `src/services/fileManager.js` - File operations
+### Key Files to Customize
+- `src/services/contextLoader.js` - Your team structure
+- `src/prompts/meetingProcessor.js` - Meeting types & OS structure
+- `src/schemas/outputSchema.js` - Valid action item owners
+- `src/services/fileManager.js` - File creation logic
 
 ## 📈 Performance
 
@@ -244,6 +319,7 @@ fathom-os-integration/
 - **Manual time saved:** ~45 minutes per meeting
 - **Token usage:** ~2,000-6,000 tokens per meeting (depending on length)
 - **Cost:** ~$0.015 per meeting (Claude API only)
+- **Capacity:** 100+ meetings/day per instance
 
 ## 🔒 Security
 
@@ -252,10 +328,7 @@ fathom-os-integration/
 - Input validation with Zod schemas
 - Helmet.js security headers
 - No sensitive data in logs
-
-## 📝 License
-
-ISC License - See LICENSE file
+- Optional encryption for stored files
 
 ## 🤝 Support
 
@@ -263,7 +336,12 @@ ISC License - See LICENSE file
 - **Documentation:** See `docs/` folder
 - **Implementation Guide:** `docs/IMPLEMENTATION-PLAN.md`
 
+## 📝 License
+
+ISC License - See LICENSE file
+
 ---
 
-**Built by:** Matthew Kerns and the AI Agency Team
 **Status:** Phase 1 Complete ✅ - Ready for deployment
+**Suitable for:** Any company using Fathom for meeting recordings
+**ROI:** Save ~45 minutes of manual work per meeting
